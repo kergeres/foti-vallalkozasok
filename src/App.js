@@ -5,7 +5,7 @@ import Layout from './components/Layout'
 function App() {
   return (
     <div className="App">
-      <img src={logo} className="App-logo" alt="logo" />
+      {/* <img src={logo} className="App-logo" alt="logo" /> */}
       <Layout />
 
     </div>
