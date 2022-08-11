@@ -1,9 +1,9 @@
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 let theme = createTheme({
   palette: {
     FovaBlue: {
-      main: "#005CA1",
+      main: "#094d82",
     },
     FovaGreen: {
       main: "#016D33",

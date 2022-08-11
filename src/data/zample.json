@@ -1,0 +1,40 @@
+{
+    "companyName": "PappVasmuhely",
+    "contact": {
+        "phone": "36209463096",
+        "email": "pvm@gmail.com",
+        "address": "2151 Fót, Bem u. 33"
+    },
+    "openingHours": {
+        "monday": {
+            "open": "08:00",
+            "close": "16:00"
+        },
+        "tuesday": {
+            "open": "08:00",
+            "close": "16:00"
+        },
+        "wednesday": {
+            "open": "08:00",
+            "close": "16:00"
+        },
+        "thursday": {
+            "open": "08:00",
+            "close": "16:00"
+        },
+        "friday": {
+            "open": "08:00",
+            "close": "16:00"
+        },
+        "saturday": {
+            "open": "",
+            "close": ""
+        },
+        "sunday": {
+            "open": "",
+            "close": ""
+        }
+    },
+    "profileImage": "www.hu",
+    "pricesImage": []
+}
