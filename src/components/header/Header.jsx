@@ -14,6 +14,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import logo from "../../logo.png";
+import BusinessTypeCard from "./BusinessTypeCard";
 
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -115,27 +116,58 @@ function Header(props) {
             }}
           >
             <Grid
-              sx={{ border: "1px solid black" }}
               container
               direction="row"
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item>
+              <Grid item xs={2}>
                 <img src={logo} className="App-logo" alt="logo" />
               </Grid>
-              <Grid item>
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Keresés"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
+              <Grid
+                item
+                sx={{
+                  border: "1px solid red",
+                  height: "110%",
+                  alignSelf: "stretch",
+                }}
+                xs={6}
+              >
+                <Grid
+                  sx={{ height: 100, width: "100%" }}
+                  container
+                  direction="column"
+                  justifyContent="end"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Search sx={{ borderRadius: "2px", mb: 2 }}>
+                      <SearchIconWrapper>
+                        <SearchIcon />
+                      </SearchIconWrapper>
+                      <StyledInputBase
+                        placeholder="Keresés"
+                        inputProps={{ "aria-label": "search" }}
+                      />
+                    </Search>
+                  </Grid>
+                  {/* businessTypeCard */}
+                  <Grid
+                    sx={{
+                      // border: "1px solid white",
+                      width: "100%",
+                      height: "50%",
+                      mb: -3,
+                    }}
+                    item
+                  >
+                    <BusinessTypeCard />
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item />
+              <Grid xs={2} item>
+                e
+              </Grid>
             </Grid>
           </Box>
         </Toolbar>

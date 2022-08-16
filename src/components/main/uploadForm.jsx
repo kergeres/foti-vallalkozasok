@@ -38,9 +38,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-// result.get("/marks.json").then((res) => console.log(res));
-
 const UploadForm = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    result.get("/businesses.json").then((res) => {
+      const fetced = [];
+
+      for (const key in res.data) {
+        fetced.push(res.data[key]);
+      }
+      console.log(fetced);
+      setData((oldArray) => [...oldArray, fetced]);
+    });
+  }, []);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [formTo, setFormTo] = useState({
@@ -112,7 +122,7 @@ const UploadForm = () => {
         <Card style={{ maxWidth: 450, margin: "50px auto" }}>
           <CardContent>
             <Typography gutterBottom variant="h5">
-              Contact Us
+              SZöveg ide
             </Typography>
             <form onSubmit={uploadFile}>
               <Grid container spacing={1} sx={{ p: 3 }}>
