@@ -40,17 +40,12 @@ const storage = getStorage(app);
 
 const UploadForm = () => {
   const [data, setData] = useState([]);
-  useEffect(() => {
-    result.get("/businesses.json").then((res) => {
-      const fetced = [];
 
-      for (const key in res.data) {
-        fetced.push(res.data[key]);
-      }
-      console.log(fetced);
-      setData((oldArray) => [...oldArray, fetced]);
-    });
-  }, []);
+  result.get("/businesses.json").then((res) => {
+    const fetced = [];
+    console.log(res);
+    // setData((oldArray) => [...oldArray, fetced]);
+  });
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [formTo, setFormTo] = useState({

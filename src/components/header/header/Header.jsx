@@ -10,12 +10,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Scrollbars } from "react-custom-scrollbars";
 import { styled, alpha } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
-import logo from "../../logo.png";
-import BusinessTypeCard from "./BusinessTypeCard";
-
+import logo from "../../../logo.png";
+import BusinessTypeCard from "../BusinessTypeCard";
+import cvts from "../../../data/cvts";
+import classes from "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 
 const drawerWidth = 240;
@@ -51,7 +53,6 @@ function Header(props) {
     display: "flex",
     alignItems: "center",
   }));
-
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {
@@ -127,7 +128,6 @@ function Header(props) {
               <Grid
                 item
                 sx={{
-                  border: "1px solid red",
                   height: "110%",
                   alignSelf: "stretch",
                 }}
@@ -157,17 +157,21 @@ function Header(props) {
                       // border: "1px solid white",
                       width: "100%",
                       height: "50%",
-                      mb: -3,
+                      mb: -2,
+                      display: "flex",
+                      overflowX: "auto",
                     }}
                     item
                   >
-                    <BusinessTypeCard />
+                    {cvts.BUSINESSTYPE.map((item) => {
+                      return (
+                        <BusinessTypeCard key={item.value} name={item.value} />
+                      );
+                    })}
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid xs={2} item>
-                e
-              </Grid>
+              <Grid xs={2} item />
             </Grid>
           </Box>
         </Toolbar>

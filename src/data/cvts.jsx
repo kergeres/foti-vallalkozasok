@@ -5,7 +5,7 @@ const cvts = {
       code: "001",
     },
     {
-      value: "cukrászda",
+      value: "Cukrászda",
       code: "002",
     },
     {
@@ -13,12 +13,22 @@ const cvts = {
       code: "003",
     },
     {
-      value: "benzinkút",
+      value: "Benzinkút",
       code: "003",
     },
     {
-      value: "benzinkút",
-      code: "003",
+      value: "Gyógyszertár",
+      code: "004",
+    },
+    {
+      value: "Élelmiszer",
+      code: "005",
+    },
+    {
+      value: "Zöldséges",
+      code: "006",
     },
   ],
 };
+
+export default cvts;
