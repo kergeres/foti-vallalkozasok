@@ -1,7 +1,8 @@
+import MapBox from "./map/MapBox";
 const BusinessProfile = () => {
   return (
     <div>
-      <div>igen</div>
+      <MapBox />
     </div>
   );
 };

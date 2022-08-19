@@ -42,10 +42,10 @@ const UploadForm = () => {
   const [data, setData] = useState([]);
 
   result.get("/businesses.json").then((res) => {
-    const fetced = [];
     console.log(res);
     // setData((oldArray) => [...oldArray, fetced]);
   });
+
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [formTo, setFormTo] = useState({
