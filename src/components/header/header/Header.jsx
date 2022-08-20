@@ -53,6 +53,7 @@ function Header(props) {
     display: "flex",
     alignItems: "center",
   }));
+
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {
