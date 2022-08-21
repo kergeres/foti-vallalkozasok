@@ -1,3 +1,21 @@
+// colors
 $fotBlue: #005ca1;
 $fotYellow: #f6b801;
 $fotGreen: #016d33;
+$mainGray: #646564;
+$lightGray: #b1b2b1;
+
+// fonts
+$sansSeriff: "Roboto", sans-serif;
+$seriff: "Roboto Slab", serif;
+
+:export {
+  fotBlue: $fotBlue;
+  fotYellow: $fotYellow;
+  fotGreen: $fotGreen;
+  mainGray: $mainGray;
+  lightGray: $lightGray;
+
+  sansSeriff: $sansSeriff;
+  seriff: $seriff;
+}

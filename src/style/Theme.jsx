@@ -1,4 +1,6 @@
 import { createTheme } from "@mui/material/styles";
+// import variables from "./_variables";
+import variables from "./_variables.scss";
 
 let theme = createTheme({
   palette: {
@@ -19,6 +21,23 @@ let theme = createTheme({
     },
     smallNav: {
       fontFamily: "font-family: 'Open Sans', sans-serif;",
+    },
+    // title
+    h1: {
+      fontSize: "32px",
+      fontWeight: 700,
+      textTransform: "uppercase",
+      lineHeight: "32px",
+      paddingTop: "50px",
+    },
+    // subtitle
+    h6: {
+      color: variables.mainGray,
+    },
+    subtitle1: {
+      textTransform: "uppercase",
+      fontFamily: variables.sansSeriff,
+      fontWeight: 500,
     },
   },
 });

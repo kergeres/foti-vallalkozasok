@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <UploadForm />
+      {/* <UploadForm /> */}
       <BusinessProfile />
     </ThemeProvider>
   );
