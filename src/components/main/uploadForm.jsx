@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Grid,
   TextField,
@@ -41,74 +41,79 @@ const storage = getStorage(app);
 const UploadForm = () => {
   const [data, setData] = useState([]);
 
-  result.get("/businesses.json").then((res) => {
-    console.log(res);
-    // setData((oldArray) => [...oldArray, fetced]);
-  });
+  // result.get("/businesses.json").then((res) => {
+  //   console.log(res);
+  //   // setData((oldArray) => [...oldArray, fetced]);
+  // });
 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  const [formTo, setFormTo] = useState({
-    id: v4(),
-    companyName: "-",
-    contact: {
-      phone: "-",
-      email: "-",
-      address: "-",
-    },
-    openingHours: {
-      monday: {
-        open: "-",
-        close: "-",
-      },
-      tuesday: {
-        open: "-",
-        close: "-",
-      },
-      wednesday: {
-        open: "-",
-        close: "-",
-      },
-      thursday: {
-        open: "-",
-        close: "-",
-      },
-      friday: {
-        open: "-",
-        close: "-",
-      },
-      saturday: {
-        open: "-",
-        close: "-",
-      },
-      sunday: {
-        open: "-",
-        close: "-",
-      },
-    },
-    profileImage: "-",
-    pricesImage: "-",
-  });
+
+  const companyNameRef = useRef();
+  const phoneRef = useRef(null);
+  const emailRef = useRef(null);
+  const addressRef = useRef(null);
+  const mondayOpenRef = useRef(null);
+  const mondayCloseRef = useRef(null);
+  const tuesdayOpenRef = useRef(null);
+  const tuesdayCloseRef = useRef(null);
+  const wednesdayOpenRef = useRef(null);
+  const wednesdayCloseRef = useRef(null);
+  const thursdayOpenRef = useRef(null);
+  const thursdayCloseRef = useRef(null);
+  const fridayOpenRef = useRef(null);
+  const fridayCloseRef = useRef(null);
+  const saturdayOpenRef = useRef(null);
+  const saturdayCloseRef = useRef(null);
+  const sundayOpenRef = useRef(null);
+  const sundayCloseRef = useRef(null);
   const save = () => {
-    console.log("kint vok");
-    result.post("/businesses.json", formTo);
+    let tomb = {
+      companyName: companyNameRef.current.value,
+      contact: {
+        phone: phoneRef.current.value,
+        email: emailRef.current.value,
+        address: addressRef.current.value,
+      },
+      openingHours: {
+        mondayOpen: mondayOpenRef.current.value,
+        mondayClose: mondayCloseRef.current.value,
+        tuesdayOpen: tuesdayOpenRef.current.value,
+        tuesdayClose: tuesdayCloseRef.current.value,
+        wednesdayOpen: wednesdayOpenRef.current.value,
+        wednesdayClose: wednesdayCloseRef.current.value,
+        thursdayOpen: thursdayOpenRef.current.value,
+        thursdayClose: thursdayCloseRef.current.value,
+        fridayOpen: fridayOpenRef.current.value,
+        fridayClose: fridayCloseRef.current.value,
+        saturdayOpen: saturdayOpenRef.current.value,
+        saturdayClose: saturdayCloseRef.current.value,
+        sundayOpen: sundayOpenRef.current.value,
+        sundayClose: sundayCloseRef.current.value,
+      },
+      profileImage: "",
+      pricesImage: "",
+    };
+    console.log(tomb);
+    // result.post("/businesses.json", tomb);
   };
 
   const uploadFile = (e) => {
     e.preventDefault();
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload)
-      .then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setImageUrls((prev) => [...prev, url]);
-          setFormTo((formTo) => ({
-            ...formTo,
-            ...{ profileImage: url },
-          }));
-        });
-      })
-      .finally(() => save());
+    save();
+    // if (imageUpload == null) return;
+    // const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    // uploadBytes(imageRef, imageUpload)
+    //   .then((snapshot) => {
+    //     getDownloadURL(snapshot.ref).then((url) => {
+    //       setImageUrls((prev) => [...prev, url]);
+    //       setFormTo((formTo) => ({
+    //         ...formTo,
+    //         ...{ profileImage: url },
+    //       }));
+    //     });
+    //   })
+    //   .finally(() => save());
   };
 
   return (
@@ -127,12 +132,7 @@ const UploadForm = () => {
                     name="companyName"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{ companyName: e.target.value },
-                      }))
-                    }
+                    inputRef={companyNameRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -141,15 +141,7 @@ const UploadForm = () => {
                     name="phone"
                     variant="outlined"
                     fullWidth
-                    value={formTo.contact.phone || ""}
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          contact: { phone: e.target.value },
-                        },
-                      }))
-                    }
+                    inputRef={phoneRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -158,12 +150,7 @@ const UploadForm = () => {
                     name="email"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{ contact: { email: e.target.value } },
-                      }))
-                    }
+                    inputRef={emailRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} sx={{ p: 3 }}>
@@ -172,12 +159,7 @@ const UploadForm = () => {
                     name="address"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{ contact: { address: e.target.value } },
-                      }))
-                    }
+                    inputRef={addressRef}
                   />
                 </Grid>
               </Grid>
@@ -188,22 +170,7 @@ const UploadForm = () => {
                     name="mondayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: {
-                            ...formTo,
-                            ...{
-                              monday: {
-                                ...formTo,
-                                ...{ open: e.target.value },
-                              },
-                            },
-                          },
-                        },
-                      }))
-                    }
+                    inputRef={mondayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -212,22 +179,7 @@ const UploadForm = () => {
                     name="mondayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: {
-                            ...formTo,
-                            ...{
-                              monday: {
-                                ...formTo,
-                                ...{ close: e.target.value },
-                              },
-                            },
-                          },
-                        },
-                      }))
-                    }
+                    inputRef={mondayCloseRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -236,22 +188,7 @@ const UploadForm = () => {
                     name="tusedayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: {
-                            ...formTo,
-                            ...{
-                              tuseday: {
-                                ...formTo,
-                                ...{ open: e.target.value },
-                              },
-                            },
-                          },
-                        },
-                      }))
-                    }
+                    inputRef={tuesdayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -260,38 +197,16 @@ const UploadForm = () => {
                     name="tusedayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: {
-                            ...formTo,
-                            ...{
-                              tuseday: {
-                                ...formTo,
-                                ...{ close: e.target.value },
-                              },
-                            },
-                          },
-                        },
-                      }))
-                    }
+                    inputRef={tuesdayCloseRef}
                   />
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="wednesday open"
                     name="wednesdayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { wednesday: { open: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={wednesdayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -300,16 +215,7 @@ const UploadForm = () => {
                     name="wednesdayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: {
-                            wednesday: { close: e.target.value },
-                          },
-                        },
-                      }))
-                    }
+                    inputRef={wednesdayCloseRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -318,14 +224,7 @@ const UploadForm = () => {
                     name="thursdayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { thursday: { open: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={thursdayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -334,14 +233,7 @@ const UploadForm = () => {
                     name="thursday"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { thursday: { close: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={thursdayCloseRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -350,14 +242,7 @@ const UploadForm = () => {
                     name="fridayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { friday: { open: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={fridayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -366,14 +251,7 @@ const UploadForm = () => {
                     name="fridayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { friday: { close: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={fridayCloseRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -382,14 +260,7 @@ const UploadForm = () => {
                     name="saturdayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { saturday: { open: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={saturdayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -398,14 +269,7 @@ const UploadForm = () => {
                     name="saturdayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { saturday: { close: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={saturdayCloseRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -414,14 +278,7 @@ const UploadForm = () => {
                     name="sundayOpen"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { sunday: { open: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={sundayOpenRef}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -430,29 +287,15 @@ const UploadForm = () => {
                     name="sundayClose"
                     variant="outlined"
                     fullWidth
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{
-                          openingHours: { sunday: { close: e.target.value } },
-                        },
-                      }))
-                    }
+                    inputRef={sundayCloseRef}
                   />
-                </Grid> */}
-                {/* <Grid item xs={12} sm={6}>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="profile Image"
                     name="profileImage"
                     variant="outlined"
                     fullWidth
-                    value={formTo.profileImage}
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{ profileImage: e.target.value },
-                      }))
-                    }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -461,15 +304,8 @@ const UploadForm = () => {
                     name="sundayClose"
                     variant="outlined"
                     fullWidth
-                    value={formTo.pricesImage}
-                    onChange={(e) =>
-                      setFormTo((formTo) => ({
-                        ...formTo,
-                        ...{ pricesImage: e.target.value },
-                      }))
-                    }
                   />
-                </Grid> */}
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <input
                     type="file"
@@ -484,6 +320,7 @@ const UploadForm = () => {
                     variant="contained"
                     color="primary"
                     fullWidth
+                    onClick={(e) => console.log(e)}
                   >
                     Submit
                   </Button>

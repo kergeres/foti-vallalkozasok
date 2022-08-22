@@ -51,7 +51,7 @@ export default function OpeningHours() {
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell
-                sx={{ p: "6px", m: 0, color: variables.mainGray }}
+                sx={{ p: "3px", m: 0, color: variables.mainGray }}
                 component="th"
                 scope="row"
               >

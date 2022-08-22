@@ -5,9 +5,6 @@ import { createRoot } from "react-dom/client";
 mapboxgl.accessToken =
   "pk.eyJ1Ijoia2VyZ2VyZXMiLCJhIjoiY2s3ZDE2OWptMGNlcDNucHE0dTJzaXRubyJ9.n8mW2tGizEW9Hwvu26iG9g";
 const Marker = ({ onClick, children, feature }) => {
-  const _onClick = () => {
-    onClick(feature.properties.description);
-  };
   const markerstyle = {
     backgroundcolor: "red",
     border: "1px solid blue",
@@ -20,12 +17,6 @@ const Marker = ({ onClick, children, feature }) => {
     margin: "4px 2px",
     borderradius: "50%",
   };
-
-  return (
-    <button onClick={_onClick} style={markerstyle}>
-      {children}
-    </button>
-  );
 };
 
 const MapBox = () => {
@@ -56,14 +47,6 @@ const MapBox = () => {
   const [lat, setLat] = useState(47.6212443);
   const [zoom, setZoom] = useState(14);
   const mapContainerRef = useRef(null);
-  const setter = () => {
-    setMarker((prev) => ({
-      ...prev,
-      ...{
-        features: { geometry: { coordinates: [18.180059, 47.622199] } },
-      },
-    }));
-  };
 
   // useEffect(() => {
 
@@ -107,8 +90,7 @@ const MapBox = () => {
 
   return (
     <>
-      <button onClick={setter}>klik</button>
-      <div style={{ height: "400px", mapContainer }} ref={mapContainerRef} />
+      <div style={{ height: "200px", mapContainer }} ref={mapContainerRef} />
     </>
   );
 };

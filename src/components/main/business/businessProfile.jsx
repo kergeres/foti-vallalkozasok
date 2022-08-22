@@ -24,7 +24,8 @@ const BusinessProfile = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        spacing={2}
+        spacing={4}
+        sx={{ mb: 3 }}
       >
         <Grid
           sx={{
@@ -56,17 +57,29 @@ const BusinessProfile = () => {
         <Grid
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "start",
             p: 1,
             alignItems: "center",
             m: 1,
             alignSelf: "stretch",
+            flexDirection: "column",
           }}
           item
           xs={3}
         >
-          {/* <Typography variant="subtitle1">Nyitvatartás</Typography> */}
-          <OpeningHours />
+          <>
+            <Typography
+              sx={{
+                pb: 2,
+                display: "inline",
+                width: "100%",
+              }}
+              variant="subtitle1"
+            >
+              Nyitvatartás
+            </Typography>
+            <OpeningHours />
+          </>
         </Grid>
         <Grid
           sx={{
@@ -80,17 +93,27 @@ const BusinessProfile = () => {
         <Grid
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "start",
             p: 1,
             alignItems: "center",
             m: 1,
             alignSelf: "stretch",
+            flexDirection: "column",
           }}
           item
           xs={3}
         >
           <>
-            {/* <Typography variant="subtitle1">elérhetőség</Typography> */}
+            <Typography
+              sx={{
+                pb: 2,
+                display: "inline",
+                width: "100%",
+              }}
+              variant="subtitle1"
+            >
+              elérhetőség
+            </Typography>
             <ContactInfo />
           </>
         </Grid>

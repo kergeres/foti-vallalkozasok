@@ -1,41 +1,106 @@
-{
-    "companyName": "PappVasmuhely",
-    "companyType": "dohánybolt",
-    "contact": {
-        "phone": "36209463096",
-        "email": "pvm@gmail.com",
-        "address": "2151 Fót, Bem u. 33"
+[
+    {
+        "companyName": "Foti Bolt",
+        "contact": {
+            "phone": "+3620984443",
+            "email": "kergeres@gmail.com",
+            "address": "2151 Fót zsigmond u. 44"
+        },
+        "openingHours": {
+            "mondayOpen": "8:00",
+            "mondayClose": "8:00",
+            "tuesdayOpen": "8:00",
+            "tuesdayClose": "8:00",
+            "wednesdayOpen": "8:00",
+            "wednesdayClose": "8:00",
+            "thursdayOpen": "8:00",
+            "thursdayClose": "8:00",
+            "fridayOpen": "8:00",
+            "fridayClose": "8:00",
+            "saturdayOpen": "8:00",
+            "saturdayClose": "8:00",
+            "sundayOpen": "8:00",
+            "sundayClose": "8:00"
+        },
+        "profileImage": "",
+        "pricesImage": ""
     },
-    "openingHours": {
-        "monday": {
-            "open": "08:00",
-            "close": "16:00"
+    {
+        "companyName": "Szepesi zöldség",
+        "contact": {
+            "phone": "+3620984213",
+            "email": "masok@gmail.com",
+            "address": "2151 Fót Szabo legeny u. 4"
         },
-        "tuesday": {
-            "open": "08:00",
-            "close": "16:00"
+        "openingHours": {
+            "mondayOpen": "8:00",
+            "mondayClose": "16:00",
+            "tuesdayOpen": "8:00",
+            "tuesdayClose": "16:00",
+            "wednesdayOpen": "8:00",
+            "wednesdayClose": "16:00",
+            "thursdayOpen": "8:00",
+            "thursdayClose": "16:00",
+            "fridayOpen": "8:00",
+            "fridayClose": "16:00",
+            "saturdayOpen": "8:00",
+            "saturdayClose": "16:00",
+            "sundayOpen": null,
+            "sundayClose": null
         },
-        "wednesday": {
-            "open": "08:00",
-            "close": "16:00"
-        },
-        "thursday": {
-            "open": "08:00",
-            "close": "16:00"
-        },
-        "friday": {
-            "open": "08:00",
-            "close": "16:00"
-        },
-        "saturday": {
-            "open": "",
-            "close": ""
-        },
-        "sunday": {
-            "open": "",
-            "close": ""
-        }
+        "profileImage": "",
+        "pricesImage": ""
     },
-    "profileImage": "www.hu",
-    "pricesImage": []
-}
+    {
+        "companyName": "Tesco Dunakeszi",
+        "contact": {
+            "phone": "+362044223ö",
+            "email": "info@gmail.com",
+            "address": "2151 Mihaly zsigmond u. 11"
+        },
+        "openingHours": {
+            "mondayOpen": "8:00",
+            "mondayClose": "16:00",
+            "tuesdayOpen": "8:00",
+            "tuesdayClose": "16:00",
+            "wednesdayOpen": "8:00",
+            "wednesdayClose": "16:00",
+            "thursdayOpen": "8:00",
+            "thursdayClose": "16:00",
+            "fridayOpen": "8:00",
+            "fridayClose": "16:00",
+            "saturdayOpen": "8:00",
+            "saturdayClose": "16:00",
+            "sundayOpen": null,
+            "sundayClose": null
+        },
+        "profileImage": "",
+        "pricesImage": ""
+    },
+    {
+        "companyName": "Kerékcsere Azsi",
+        "contact": {
+            "phone": "+362044299",
+            "email": "aaafo@smartix.com",
+            "address": "2151 Dozsa Gyory u. 90b"
+        },
+        "openingHours": {
+            "mondayOpen": "8:00",
+            "mondayClose": "16:00",
+            "tuesdayOpen": "8:00",
+            "tuesdayClose": "16:00",
+            "wednesdayOpen": "8:00",
+            "wednesdayClose": "16:00",
+            "thursdayOpen": "8:00",
+            "thursdayClose": "16:00",
+            "fridayOpen": "8:00",
+            "fridayClose": "16:00",
+            "saturdayOpen": "8:00",
+            "saturdayClose": "16:00",
+            "sundayOpen": "10:00",
+            "sundayClose": "11:40"
+        },
+        "profileImage": "",
+        "pricesImage": ""
+    }
+]
