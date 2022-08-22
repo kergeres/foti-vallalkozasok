@@ -6,29 +6,48 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import variables from "../../../style/_variables.scss";
 import { Link } from "@mui/material";
+import dayjs from "dayjs";
 
-const infos = [
-  {
-    isOpen: true,
-    name: "Sportpálya",
-    address: "2125 Ozd, ize u. 33",
-  },
-  {
-    isOpen: true,
-    name: "Sanyi manikur",
-    address: "2125 Ozd, ize u. 33",
-  },
-  {
-    isOpen: false,
-    name: "Tesco dunakeszi",
-    address: "21 csak  Ozd, ize u. 33",
-  },
-  {
-    isOpen: true,
-    name: "Lidl Fotliget",
-    address: "2125 MariaOzd, iesaze u. 33",
-  },
-];
+var customParseFormat = require("dayjs/plugin/customParseFormat");
+dayjs.extend(customParseFormat);
+
+const businessesRef = require("../../../data/zample.json");
+const businesses = [];
+businessesRef.map((business) => {
+  let toDayIs = dayjs().day();
+  let TodayString =
+    toDayIs === 1
+      ? "monday"
+      : toDayIs === 2
+      ? "tuesday"
+      : toDayIs === 3
+      ? "wednesday"
+      : toDayIs === 4
+      ? "thursday"
+      : toDayIs === 5
+      ? "friday"
+      : toDayIs === 6
+      ? "saturday"
+      : toDayIs === 7
+      ? "sunday"
+      : "";
+
+  let todayOpen = `${TodayString}Open`;
+  let todayClose = `${TodayString}Close`;
+  let nyitvaE =
+    dayjs(business.openingHours[todayOpen], "HH:mm") < dayjs() &&
+    dayjs(business.openingHours[todayClose], "HH:mm") > dayjs()
+      ? true
+      : false;
+  console.log(dayjs(business.openingHours[todayOpen], "HH:mm"));
+  let infoObj = {
+    isOpen: nyitvaE,
+    name: business.companyName,
+    address: business.contact.address,
+  };
+
+  businesses.push(infoObj);
+});
 
 const Businesses = () => {
   return (
@@ -42,7 +61,7 @@ const Businesses = () => {
         }}
       >
         <TableBody>
-          {infos.map((row, index) => {
+          {businesses.map((row, index) => {
             return (
               <TableRow
                 sx={{

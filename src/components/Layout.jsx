@@ -12,10 +12,10 @@ const Layout = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <UploadForm />
-      {/* <Businesses /> */}
+      {/* <UploadForm /> */}
+      <Businesses />
       {/* <BusinessProfile /> */}
-      <Footer />
+      {/* <Footer /> */}
     </ThemeProvider>
   );
 };
