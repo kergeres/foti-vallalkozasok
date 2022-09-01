@@ -3,6 +3,9 @@ import { Grid, Typography } from "@mui/material";
 import variables from "../../../style/_variables.scss";
 import OpeningHours from "./inGrid/openingHours";
 import ContactInfo from "./inGrid/contactInfo";
+import IsItOpen from "../../helpers/IsItOpen";
+const businessesRef = require("../../../data/zample.json");
+const business = businessesRef[1];
 const BusinessProfile = () => {
   return (
     <>
@@ -14,8 +17,8 @@ const BusinessProfile = () => {
         sx={{ marginBottom: "40px" }}
       >
         <Grid item>
-          <Typography variant="h1">Kisalagi Abc</Typography>
-          <Typography variant="h6">Élelmiszerbolt</Typography>
+          <Typography variant="h1">{business.companyName}</Typography>
+          <Typography variant="h6">{business.companyType}</Typography>
         </Grid>
       </Grid>
       {/* harmas felosztasu grid */}
@@ -42,7 +45,7 @@ const BusinessProfile = () => {
           <img
             alt="kep"
             style={{ width: "100%" }}
-            src="https://hubbellcdn.com/ohwassets/HLI/beacon/resources/case_studies/img-academy/img-1.jpg"
+            src={business.profileImage}
           />
         </Grid>
         <Grid
@@ -70,7 +73,7 @@ const BusinessProfile = () => {
           <>
             <Typography
               sx={{
-                pb: 2,
+                pb: 0,
                 display: "inline",
                 width: "100%",
               }}
@@ -78,7 +81,18 @@ const BusinessProfile = () => {
             >
               Nyitvatartás
             </Typography>
-            <OpeningHours />
+            <Typography
+              sx={{
+                p: "0px",
+                mt: "-12px",
+                color: IsItOpen(business)
+                  ? variables.muiSucces
+                  : variables.muiError,
+              }}
+            >
+              {IsItOpen(business) ? "nyitva" : "zárva"}
+            </Typography>
+            <OpeningHours business={business} />
           </>
         </Grid>
         <Grid
@@ -118,7 +132,6 @@ const BusinessProfile = () => {
           </>
         </Grid>
       </Grid>
-
       <MapBox />
     </>
   );

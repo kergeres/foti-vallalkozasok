@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import variables from "../../../style/_variables.scss";
 import { Link } from "@mui/material";
 import dayjs from "dayjs";
+import IsItOpen from "../../helpers/IsItOpen";
 
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
@@ -14,34 +15,8 @@ dayjs.extend(customParseFormat);
 const businessesRef = require("../../../data/zample.json");
 const businesses = [];
 businessesRef.map((business) => {
-  let toDayIs = dayjs().day();
-  let TodayString =
-    toDayIs === 1
-      ? "monday"
-      : toDayIs === 2
-      ? "tuesday"
-      : toDayIs === 3
-      ? "wednesday"
-      : toDayIs === 4
-      ? "thursday"
-      : toDayIs === 5
-      ? "friday"
-      : toDayIs === 6
-      ? "saturday"
-      : toDayIs === 7
-      ? "sunday"
-      : "";
-
-  let todayOpen = `${TodayString}Open`;
-  let todayClose = `${TodayString}Close`;
-  let nyitvaE =
-    dayjs(business.openingHours[todayOpen], "HH:mm") < dayjs() &&
-    dayjs(business.openingHours[todayClose], "HH:mm") > dayjs()
-      ? true
-      : false;
-  console.log(dayjs(business.openingHours[todayOpen], "HH:mm"));
   let infoObj = {
-    isOpen: nyitvaE,
+    isOpen: IsItOpen(business),
     name: business.companyName,
     address: business.contact.address,
   };

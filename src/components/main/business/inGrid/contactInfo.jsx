@@ -58,7 +58,6 @@ const ContactInfo = () => {
       >
         <TableBody>
           {rows.map((row, index) => {
-            console.log(row.icon);
             let preTag =
               row.key === "mail"
                 ? "mailto:"
@@ -68,7 +67,6 @@ const ContactInfo = () => {
                 ? "https://www.google.com/maps/dir/?api=1&"
                 : "";
 
-            console.log(`${preTag}${row.info}`);
             return (
               <TableRow key={index}>
                 <TableCell sx={{ p: "0px", m: 0, width: "10px" }} align="right">

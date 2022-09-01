@@ -27,23 +27,51 @@ const times = [
     sundayClose: "16:00",
   },
 ];
-const rows = [
-  createData("Hétfő", times[0].mondayOpen, times[0].mondayClose),
-  createData("Kedd", times[0].fridayOpen, times[0].fridayClose),
-  createData("Szerda", times[0].fridayOpen, times[0].fridayClose),
-  createData("Csütörtök", times[0].fridayOpen, times[0].fridayClose),
-  createData("Péntek", times[0].fridayOpen, times[0].fridayClose),
-  createData("Szombat", times[0].fridayOpen, times[0].fridayClose),
-  createData("Vasárnap", times[0].fridayOpen, times[0].fridayClose),
-];
 
-export default function OpeningHours() {
+export default function OpeningHours(props) {
+  const rows = [
+    createData(
+      "Hétfő",
+      props.business.openingHours.mondayOpen,
+      props.business.openingHours.mondayClose
+    ),
+    createData(
+      "Kedd",
+      props.business.openingHours.tuesdayOpen,
+      props.business.openingHours.tuesdayClose
+    ),
+    createData(
+      "Szerda",
+      props.business.openingHours.wednesdayOpen,
+      props.business.openingHours.wednesdayClose
+    ),
+    createData(
+      "Csütörtök",
+      props.business.openingHours.thursdayOpen,
+      props.business.openingHours.thursdayClose
+    ),
+    createData(
+      "Péntek",
+      props.business.openingHours.fridayOpen,
+      props.business.openingHours.fridayClose
+    ),
+    createData(
+      "Szombat",
+      props.business.openingHours.saturdayOpen,
+      props.business.openingHours.saturdayClose
+    ),
+    createData(
+      "Vasárnap",
+      props.business.openingHours.sundayOpen,
+      props.business.openingHours.sundayClose
+    ),
+  ];
   return (
     <TableContainer>
       <Table
         sx={{
           [`& .${tableCellClasses.root}`]: {
-            border: "none",
+            // border: "none",
           },
         }}
       >
@@ -57,14 +85,66 @@ export default function OpeningHours() {
               >
                 {row.name}
               </TableCell>
-              <TableCell sx={{ p: "0px", m: 0, width: "10px" }} align="right">
-                {row.open}
+              <TableCell
+                sx={{
+                  p: "0px",
+                  m: 0,
+                  width: "20px",
+                  // border: "1px solid black",
+                }}
+                // align="right"
+              >
+                {row.open === ""
+                  ? ""
+                  : row.open == null
+                  ? ""
+                  : row.open === "zárva"
+                  ? ""
+                  : row.close === ""
+                  ? ""
+                  : row.close == null
+                  ? ""
+                  : row.close === "zárva"
+                  ? ""
+                  : row.open}
               </TableCell>
               <TableCell sx={{ p: "2px", m: 0, width: "0px" }} align="right">
-                -
+                {row.open === ""
+                  ? ""
+                  : row.open == null
+                  ? ""
+                  : row.open === "zárva"
+                  ? ""
+                  : row.close === ""
+                  ? ""
+                  : row.close == null
+                  ? ""
+                  : row.close === "zárva"
+                  ? ""
+                  : "-"}
               </TableCell>
-              <TableCell sx={{ p: "0px", m: 0, width: "10px" }} align="right">
-                {row.close}
+              <TableCell
+                sx={{
+                  p: "0px",
+                  m: 0,
+                  width: "20px",
+                  // border: "1px solid black",
+                }}
+                align="right"
+              >
+                {row.open === ""
+                  ? "zárva"
+                  : row.open == null
+                  ? "zárva"
+                  : row.open === "zárva"
+                  ? "zárva"
+                  : row.close === ""
+                  ? "zárva"
+                  : row.close == null
+                  ? "zárva"
+                  : row.close === "zárva"
+                  ? "zárva"
+                  : row.close}
               </TableCell>
             </TableRow>
           ))}

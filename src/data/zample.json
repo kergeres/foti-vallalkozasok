@@ -1,32 +1,34 @@
 [
     {
         "companyName": "Foti Bolt",
+        "companyType": "hentes",
         "contact": {
             "phone": "+3620984443",
             "email": "kergeres@gmail.com",
             "address": "2151 Fót zsigmond u. 44"
         },
         "openingHours": {
-            "mondayOpen": "8:00",
+            "mondayOpen": "10:00",
             "mondayClose": "23:50",
-            "tuesdayOpen": "8:00",
+            "tuesdayOpen": "2:00",
             "tuesdayClose": "8:00",
-            "wednesdayOpen": "8:00",
+            "wednesdayOpen": "3:00",
             "wednesdayClose": "8:00",
-            "thursdayOpen": "8:00",
+            "thursdayOpen": "4:00",
             "thursdayClose": "8:00",
-            "fridayOpen": "8:00",
+            "fridayOpen": "10:00",
             "fridayClose": "8:00",
-            "saturdayOpen": "8:00",
+            "saturdayOpen": "6:00",
             "saturdayClose": "8:00",
-            "sundayOpen": "8:00",
-            "sundayClose": "8:00"
+            "sundayOpen": "zárva",
+            "sundayClose": "zárva"
         },
-        "profileImage": "",
+        "profileImage": "https://www.csaszartoltes.hu/images/Latni/templom/Toltes_54.jpg",
         "pricesImage": ""
     },
     {
         "companyName": "Szepesi zöldség",
+        "companyType": "hentes",
         "contact": {
             "phone": "+3620984213",
             "email": "masok@gmail.com",
@@ -35,24 +37,25 @@
         "openingHours": {
             "mondayOpen": "8:00",
             "mondayClose": "16:00",
-            "tuesdayOpen": "8:00",
+            "tuesdayOpen": "7:00",
             "tuesdayClose": "16:00",
             "wednesdayOpen": "8:00",
             "wednesdayClose": "16:00",
             "thursdayOpen": "8:00",
             "thursdayClose": "16:00",
-            "fridayOpen": "8:00",
+            "fridayOpen": "10:00",
             "fridayClose": "16:00",
             "saturdayOpen": "8:00",
-            "saturdayClose": "16:00",
-            "sundayOpen": null,
-            "sundayClose": null
+            "saturdayClose": "15:00",
+            "sundayOpen": "záárva",
+            "sundayClose": "zárva"
         },
-        "profileImage": "",
+        "profileImage": "https://fertorakos.hu/wp-content/uploads/2021/05/1200px-Urunk_Mennybemenetele_templom_Fertorakos_05.jpg",
         "pricesImage": ""
     },
     {
         "companyName": "Tesco Dunakeszi",
+        "companyType": "hentes",
         "contact": {
             "phone": "+362044223ö",
             "email": "info@gmail.com",
@@ -66,11 +69,11 @@
             "wednesdayOpen": "8:00",
             "wednesdayClose": "16:00",
             "thursdayOpen": "8:00",
-            "thursdayClose": "16:00",
-            "fridayOpen": "8:00",
+            "thursdayClose": "21:00",
+            "fridayOpen": "7:00",
             "fridayClose": "16:00",
-            "saturdayOpen": "8:00",
-            "saturdayClose": "16:00",
+            "saturdayOpen": "7:00",
+            "saturdayClose": "21:00",
             "sundayOpen": null,
             "sundayClose": null
         },
@@ -79,6 +82,7 @@
     },
     {
         "companyName": "Kerékcsere Azsi",
+        "companyType": "hentes",
         "contact": {
             "phone": "+362044299",
             "email": "aaafo@smartix.com",
