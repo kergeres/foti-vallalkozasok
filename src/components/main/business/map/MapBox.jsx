@@ -20,40 +20,51 @@ const Marker = ({ onClick, children, feature }) => {
 };
 
 const MapBox = () => {
-  const [marker, setMarker] = useState({
-    features: [
-      {
-        type: "Feature",
-        properties: {
-          title: "Lincoln Park",
-          description: "A northside park that is home to the Lincoln Park Zoo",
-        },
-        geometry: {
-          coordinates: [19.180053, 47.622193],
-          type: "Point",
-        },
-      },
-    ],
-    type: "FeatureCollection",
-  });
   const mapContainer = {
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
   };
-  const map = useRef(null);
   const [lng, setLng] = useState(19.1834359);
   const [lat, setLat] = useState(47.6212443);
   const [zoom, setZoom] = useState(14);
   const mapContainerRef = useRef(null);
+  const axios = require("axios");
+  const params = {
+    access_key: "eb0dee09b4ed8c994e0d1de4870a8f7",
+    query: "Ady Endre u. 123, Kerepes",
+  };
 
-  // useEffect(() => {
-
-  //   });
-  // },[marker]);
+  axios
+    .get("http://api.positionstack.com/v1/forward", { params })
+    .then((response) => {
+      setLat(response.data.data[0].latitude);
+      setLng(response.data.data[0].longitude);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   useEffect(() => {
+    const marker = {
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            title: "Lincoln Park",
+            description:
+              "A northside park that is home to the Lincoln Park Zoo",
+          },
+          geometry: {
+            coordinates: [lng, lat],
+            type: "Point",
+          },
+        },
+      ],
+      type: "FeatureCollection",
+    };
+
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/kergeres/cl6zk7bup001614o2i5xnjp7k",
@@ -61,32 +72,45 @@ const MapBox = () => {
       zoom: zoom,
     });
 
-    // Render custom marker components
-    marker.features.forEach((feature) => {
-      // Create a React ref
-      const ref = React.createRef();
-      // Create a new DOM node and save it to the React ref
-      ref.current = document.createElement("div");
-      // Render a Marker Component on our new DOM node
-
-      createRoot(ref.current).render(
-        <Marker onClick={markerClicked} feature={feature} />
+    map.on("load", function () {
+      // Add an image to use as a custom marker
+      map.loadImage(
+        "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+        function (error, image) {
+          if (error) throw error;
+          map.addImage("custom-marker", image);
+          // Add a GeoJSON source with multiple points
+          map.addSource("points", {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: marker.features,
+            },
+          });
+          // Add a symbol layer
+          map.addLayer({
+            id: "points",
+            type: "symbol",
+            source: "points",
+            layout: {
+              "icon-image": "custom-marker",
+              // get the title name from the source's "title" property
+              "text-field": ["get", "title"],
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 1.25],
+              "text-anchor": "top",
+            },
+          });
+        }
       );
-
-      // Create a Mapbox Marker at our new DOM node
-      new mapboxgl.Marker(ref.current)
-        .setLngLat(feature.geometry.coordinates)
-        .addTo(map);
     });
+
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
 
     // Clean up on unmount
     return () => map.remove();
-  }, [marker]);
-  const markerClicked = (title) => {
-    window.alert(title);
-  };
+  }, [lat]);
 
   return (
     <>
