@@ -5,7 +5,7 @@ import OpeningHours from "./inGrid/openingHours";
 import ContactInfo from "./inGrid/contactInfo";
 import IsItOpen from "../../helpers/IsItOpen";
 const businessesRef = require("../../../data/zample.json");
-const business = businessesRef[1];
+const business = businessesRef[0];
 const BusinessProfile = () => {
   return (
     <>
@@ -132,7 +132,7 @@ const BusinessProfile = () => {
           </>
         </Grid>
       </Grid>
-      <MapBox />
+      <MapBox business={business} />
     </>
   );
 };

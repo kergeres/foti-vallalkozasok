@@ -19,32 +19,37 @@ const Marker = ({ onClick, children, feature }) => {
   };
 };
 
-const MapBox = () => {
+const MapBox = (business) => {
+  console.log(business);
   const mapContainer = {
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
   };
+  console.log(business.business.contact.address);
   const [lng, setLng] = useState(19.1834359);
   const [lat, setLat] = useState(47.6212443);
   const [zoom, setZoom] = useState(14);
   const mapContainerRef = useRef(null);
-  const axios = require("axios");
-  const params = {
-    access_key: "eb0dee09b4ed8c994e0d1de4870a8f7",
-    query: "Ady Endre u. 123, Kerepes",
-  };
 
-  axios
-    .get("http://api.positionstack.com/v1/forward", { params })
-    .then((response) => {
-      setLat(response.data.data[0].latitude);
-      setLng(response.data.data[0].longitude);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  useEffect(() => {
+    const axios = require("axios");
+    const params = {
+      access_key: "eb0dee09b4ed8c994e0d1de4870a8f7",
+      query: `Fót, Bem József u. 33, 2151`,
+    };
+    axios
+      .get("http://api.positionstack.com/v1/forward", { params })
+      .then((response) => {
+        console.log(response);
+        setLat(response.data.data[0].latitude);
+        setLng(response.data.data[0].longitude);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     const marker = {
@@ -52,9 +57,8 @@ const MapBox = () => {
         {
           type: "Feature",
           properties: {
-            title: "Lincoln Park",
-            description:
-              "A northside park that is home to the Lincoln Park Zoo",
+            title: business.business.companyName,
+            description: "",
           },
           geometry: {
             coordinates: [lng, lat],
@@ -110,7 +114,7 @@ const MapBox = () => {
 
     // Clean up on unmount
     return () => map.remove();
-  }, [lat]);
+  }, []);
 
   return (
     <>
