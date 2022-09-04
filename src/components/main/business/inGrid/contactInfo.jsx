@@ -23,30 +23,31 @@ const infos = [
     instagram: "",
   },
 ];
-let rows = [];
 
-for (let i = 0; i < Object.keys(infos[0]).length; i++) {
-  let key = Object.keys(infos[0])[i];
-  let transferedIcon =
-    key === "phone" ? (
-      <PhoneIcon />
-    ) : key === "mail" ? (
-      <MailIcon />
-    ) : key === "address" ? (
-      <HomeIcon />
-    ) : key === "website" ? (
-      <LanguageIcon />
-    ) : key === "facebook" ? (
-      <FacebookIcon sx={{ color: "blue" }} hr />
-    ) : key === "instagram" ? (
-      <InstagramIcon />
-    ) : (
-      ""
-    );
-  let value = Object.values(infos[0])[i];
-  rows.push({ key, icon: transferedIcon, info: value });
-}
-const ContactInfo = () => {
+const ContactInfo = (props) => {
+  let rows = [];
+
+  for (let i = 0; i < Object.keys(props.business[0].contact).length; i++) {
+    let key = Object.keys(props.business[0].contact)[i];
+    let transferedIcon =
+      key === "phone" ? (
+        <PhoneIcon />
+      ) : key === "mail" ? (
+        <MailIcon />
+      ) : key === "address" ? (
+        <HomeIcon />
+      ) : key === "website" ? (
+        <LanguageIcon />
+      ) : key === "facebook" ? (
+        <FacebookIcon sx={{ color: "blue" }} hr />
+      ) : key === "instagram" ? (
+        <InstagramIcon />
+      ) : (
+        ""
+      );
+    let value = Object.values(props.business[0].contact)[i];
+    rows.push({ key, icon: transferedIcon, info: value });
+  }
   return (
     <TableContainer>
       <Table

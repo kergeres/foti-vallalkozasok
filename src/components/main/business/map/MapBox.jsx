@@ -20,14 +20,12 @@ const Marker = ({ onClick, children, feature }) => {
 };
 
 const MapBox = (business) => {
-  console.log(business);
   const mapContainer = {
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
   };
-  console.log(business.business.contact.address);
   const [lng, setLng] = useState(19.1834359);
   const [lat, setLat] = useState(47.6212443);
   const [zoom, setZoom] = useState(14);

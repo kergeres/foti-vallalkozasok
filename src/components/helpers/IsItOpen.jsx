@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import { type } from "@testing-library/user-event/dist/type";
 const IsItOpen = (business) => {
   let toDayIs = dayjs().day();
   let TodayString =
@@ -15,15 +16,16 @@ const IsItOpen = (business) => {
       ? "friday"
       : toDayIs === 6
       ? "saturday"
-      : toDayIs === 7
+      : toDayIs === 0
       ? "sunday"
       : "";
 
   let todayOpen = `${TodayString}Open`;
   let todayClose = `${TodayString}Close`;
+
   let so =
-    dayjs(business.openingHours[todayOpen], "HH:mm") < dayjs() &&
-    dayjs(business.openingHours[todayClose], "HH:mm") > dayjs()
+    dayjs(business[0].openingHours[todayOpen], "HH:mm") < dayjs() &&
+    dayjs(business[0].openingHours[todayClose], "HH:mm") > dayjs()
       ? true
       : false;
 

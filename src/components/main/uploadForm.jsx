@@ -33,11 +33,6 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 const UploadForm = () => {
-  // result.get("/businesses.json").then((res) => {
-  //   console.log(res);
-  //   // setData((oldArray) => [...oldArray, fetced]);
-  // });
-
   const [imageUpload, setImageUpload] = useState(null);
 
   const companyNameRef = useRef();

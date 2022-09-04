@@ -9,61 +9,43 @@ import variables from "../../../../style/_variables.scss";
 const createData = (name, open, close) => {
   return { name, open, close };
 };
-const times = [
-  {
-    mondayOpen: "8:00",
-    mondayClose: "16:00",
-    tuesdayOpen: "16:00",
-    tuesdayClose: "16:00",
-    wednesdayOpen: "16:00",
-    wednesdayClose: "16:00",
-    thursdayOpen: "16:00",
-    thursdayClose: "16:00",
-    fridayOpen: "8:00",
-    fridayClose: "16:00",
-    saturdayOpen: "8:00",
-    saturdayClose: "16:00",
-    sundayOpen: "8:00",
-    sundayClose: "16:00",
-  },
-];
 
 export default function OpeningHours(props) {
   const rows = [
     createData(
       "Hétfő",
-      props.business.openingHours.mondayOpen,
-      props.business.openingHours.mondayClose
+      props.business[0].openingHours.mondayOpen,
+      props.business[0].openingHours.mondayClose
     ),
     createData(
       "Kedd",
-      props.business.openingHours.tuesdayOpen,
-      props.business.openingHours.tuesdayClose
+      props.business[0].openingHours.tuesdayOpen,
+      props.business[0].openingHours.tuesdayClose
     ),
     createData(
       "Szerda",
-      props.business.openingHours.wednesdayOpen,
-      props.business.openingHours.wednesdayClose
+      props.business[0].openingHours.wednesdayOpen,
+      props.business[0].openingHours.wednesdayClose
     ),
     createData(
       "Csütörtök",
-      props.business.openingHours.thursdayOpen,
-      props.business.openingHours.thursdayClose
+      props.business[0].openingHours.thursdayOpen,
+      props.business[0].openingHours.thursdayClose
     ),
     createData(
       "Péntek",
-      props.business.openingHours.fridayOpen,
-      props.business.openingHours.fridayClose
+      props.business[0].openingHours.fridayOpen,
+      props.business[0].openingHours.fridayClose
     ),
     createData(
       "Szombat",
-      props.business.openingHours.saturdayOpen,
-      props.business.openingHours.saturdayClose
+      props.business[0].openingHours.saturdayOpen,
+      props.business[0].openingHours.saturdayClose
     ),
     createData(
       "Vasárnap",
-      props.business.openingHours.sundayOpen,
-      props.business.openingHours.sundayClose
+      props.business[0].openingHours.sundayOpen,
+      props.business[0].openingHours.sundayClose
     ),
   ];
   return (
