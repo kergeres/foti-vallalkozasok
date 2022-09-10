@@ -10,12 +10,14 @@ import result from "../../api/firebaseApis";
 // const business = businessesRef[0];
 
 const BusinessProfile = () => {
-  const chosenId = "-NB6ODmHrmQcT7gH9Rxl";
+  const chosenId = "-NB7PkYcLjBKT-mODb6R";
   const [business, setBusiness] = useState([]);
 
   useEffect(() => {
-    result.get("/businesses.json").then((res) => {
-      setBusiness((old) => [...old, res.data[chosenId]]);
+    result.get(`/businesses/${chosenId}.json`).then((res) => {
+      // setBusiness((old) => [...old, res.data[chosenId]]);
+      setBusiness((old) => [...old, res.data]);
+      console.log(res);
     });
   }, []);
 
