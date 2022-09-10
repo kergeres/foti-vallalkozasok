@@ -13,8 +13,8 @@ const Layout = () => {
     <ThemeProvider theme={theme}>
       <Header />
       {/* <UploadForm /> */}
-      {/* <Businesses /> */}
-      <BusinessProfile />
+      <Businesses />
+      {/* <BusinessProfile /> */}
       {/* <Footer /> */}
     </ThemeProvider>
   );

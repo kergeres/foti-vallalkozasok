@@ -32,7 +32,8 @@ const Businesses = () => {
   const [businesses, setBusinesses] = useState([]);
   useEffect(() => {
     result.get("/businesses.json").then((res) => {
-      Object.keys(res.data).forEach((key) => {
+      Object.keys(res.data).forEach((key, index) => {
+        res.data[key].id = key;
         setBusunessesRef((old) => [...old, res.data[key]]);
       });
     });

@@ -35,14 +35,16 @@ const MapBox = (business) => {
     const axios = require("axios");
     const params = {
       access_key: "eb0dee09b4ed8c994e0d1de4870a8f7",
-      query: `Fót, Bem József u. 33, 2151`,
+      query: `Fót, Boróka u. 3, 2151`,
     };
     axios
       .get("http://api.positionstack.com/v1/forward", { params })
       .then((response) => {
         console.log(response);
-        setLat(response.data.data[0].latitude);
-        setLng(response.data.data[0].longitude);
+        setLat(46.249831);
+        setLng(20.16996);
+        //  setLat(response.data.data[0].latitude);
+        // setLng(response.data.data[0].longitude);
       })
       .catch((error) => {
         console.log(error);
@@ -112,7 +114,7 @@ const MapBox = (business) => {
 
     // Clean up on unmount
     return () => map.remove();
-  }, []);
+  }, [lng]);
 
   return (
     <>

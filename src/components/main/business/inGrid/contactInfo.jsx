@@ -31,23 +31,38 @@ const ContactInfo = (props) => {
     let key = Object.keys(props.business[0].contact)[i];
     let transferedIcon =
       key === "phone" ? (
-        <PhoneIcon />
-      ) : key === "mail" ? (
-        <MailIcon />
+        <PhoneIcon sx={{ color: "#383e42" }} />
+      ) : key === "email" ? (
+        <MailIcon sx={{ color: "#383e42" }} />
       ) : key === "address" ? (
-        <HomeIcon />
+        <HomeIcon sx={{ color: "#383e42" }} />
       ) : key === "website" ? (
-        <LanguageIcon />
+        <LanguageIcon sx={{ color: "#383e42" }} />
       ) : key === "facebook" ? (
-        <FacebookIcon sx={{ color: "blue" }} hr />
+        <FacebookIcon sx={{ color: "#4267B2" }} hr />
       ) : key === "instagram" ? (
-        <InstagramIcon />
+        <InstagramIcon sx={{ color: "#FCAF45" }} />
       ) : (
         ""
       );
+    let sortNumber =
+      key === "phone"
+        ? 1
+        : key === "email"
+        ? 2
+        : key === "address"
+        ? 0
+        : key === "website"
+        ? 3
+        : key === "facebook"
+        ? 4
+        : key === "instagram"
+        ? 5
+        : "";
     let value = Object.values(props.business[0].contact)[i];
-    rows.push({ key, icon: transferedIcon, info: value });
+    rows.push({ key, icon: transferedIcon, info: value, sortNumber });
   }
+  rows.sort((a, b) => a.sortNumber - b.sortNumber);
   return (
     <TableContainer>
       <Table
@@ -67,16 +82,32 @@ const ContactInfo = (props) => {
                 : row.key === "address"
                 ? "https://www.google.com/maps/dir/?api=1&"
                 : "";
-
             return (
-              <TableRow key={index}>
-                <TableCell sx={{ p: "0px", m: 0, width: "10px" }} align="right">
-                  <Link href={`${preTag}${row.info}`}>{row.icon} </Link>
-                </TableCell>
-                <TableCell sx={{ p: "0px", m: 0, width: "10px" }} align="right">
-                  {<Link href={`${preTag}${row.info}`}>{row.info}</Link>}
-                </TableCell>
-              </TableRow>
+              row.info && (
+                <TableRow key={index}>
+                  <TableCell
+                    sx={{ p: "0px", m: 0, width: "10px" }}
+                    align="right"
+                  >
+                    <Link href={`${preTag}${row.info}`}>{row.icon} </Link>
+                  </TableCell>
+                  <TableCell
+                    sx={{ p: "0px", m: 0, width: "10px" }}
+                    align="right"
+                  >
+                    <Link
+                      sx={{ color: "#383e42", textDecorationColor: "#383e42" }}
+                      href={`${preTag}${row.info}`}
+                    >
+                      {row.key === "facebook"
+                        ? ""
+                        : row.key === "instagram"
+                        ? ""
+                        : row.info.replace(/^https?\:\/\/www\./i, "")}
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              )
             );
           })}
         </TableBody>

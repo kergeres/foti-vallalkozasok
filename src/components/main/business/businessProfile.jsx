@@ -30,8 +30,8 @@ const BusinessProfile = () => {
           sx={{ marginBottom: "40px" }}
         >
           <Grid item>
-            <Typography variant="h1">{business.companyName}</Typography>
-            <Typography variant="h6">{business.companyType}</Typography>
+            <Typography variant="h1">{business[0].companyName}</Typography>
+            <Typography variant="h6">{business[0].companyType}</Typography>
           </Grid>
         </Grid>
         {/* harmas felosztasu grid */}
@@ -97,12 +97,12 @@ const BusinessProfile = () => {
                 sx={{
                   p: "0px",
                   mt: "-12px",
-                  color: IsItOpen(business)
+                  color: IsItOpen(business[0])
                     ? variables.muiSucces
                     : variables.muiError,
                 }}
               >
-                {IsItOpen(business) ? "nyitva" : "zárva"}
+                {IsItOpen(business[0]) ? "nyitva" : "zárva"}
               </Typography>
               <OpeningHours business={business} />
             </>

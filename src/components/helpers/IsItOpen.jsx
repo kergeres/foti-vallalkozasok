@@ -19,13 +19,12 @@ const IsItOpen = (business) => {
       : toDayIs === 0
       ? "sunday"
       : "";
-
   let todayOpen = `${TodayString}Open`;
   let todayClose = `${TodayString}Close`;
 
   let so =
-    dayjs(business[0].openingHours[todayOpen], "HH:mm") < dayjs() &&
-    dayjs(business[0].openingHours[todayClose], "HH:mm") > dayjs()
+    dayjs(business.openingHours[todayOpen], "HH:mm") < dayjs() &&
+    dayjs(business.openingHours[todayClose], "HH:mm") > dayjs()
       ? true
       : false;
 
