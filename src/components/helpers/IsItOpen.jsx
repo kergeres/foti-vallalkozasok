@@ -21,7 +21,6 @@ const IsItOpen = (business) => {
       : "";
   let todayOpen = `${TodayString}Open`;
   let todayClose = `${TodayString}Close`;
-
   let so =
     dayjs(business.openingHours[todayOpen], "HH:mm") < dayjs() &&
     dayjs(business.openingHours[todayClose], "HH:mm") > dayjs()

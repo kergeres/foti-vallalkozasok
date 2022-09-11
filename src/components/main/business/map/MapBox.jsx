@@ -40,7 +40,7 @@ const MapBox = (business) => {
     axios
       .get("http://api.positionstack.com/v1/forward", { params })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setLat(46.249831);
         setLng(20.16996);
         //  setLat(response.data.data[0].latitude);

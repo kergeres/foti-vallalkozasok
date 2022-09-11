@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Typography, typography } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "../style/Theme";
 import Header from "./header/header/Header";
 import UploadForm from "./main/uploadForm";
@@ -9,12 +8,13 @@ import Footer from "./footer/Footer";
 import Businesses from "./main/busenesses/Businesses";
 
 const Layout = () => {
+  const [searchV, setSearchV] = React.useState("");
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <Header searchV={searchV} setSearchV={setSearchV} />
       {/* <UploadForm /> */}
-      {/* <Businesses /> */}
-      <BusinessProfile />
+      <Businesses searchV={searchV} />
+      {/* <BusinessProfile /> */}
       {/* <Footer /> */}
     </ThemeProvider>
   );

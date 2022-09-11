@@ -9,7 +9,6 @@ const BusinessTypeCard = (props) => {
     margin: "0 5px",
     alignSelf: "center",
   };
-
   return <div style={cardStyle}>{props.name}</div>;
 };
 

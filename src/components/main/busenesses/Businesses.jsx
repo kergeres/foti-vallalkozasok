@@ -11,6 +11,7 @@ import IsItOpen from "../../helpers/IsItOpen";
 import result from "../../api/firebaseApis";
 import { useState } from "react";
 import { useEffect } from "react";
+import { reduceEachLeadingCommentRange } from "typescript";
 
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
@@ -27,17 +28,40 @@ dayjs.extend(customParseFormat);
 //   businesses.push(infoObj);
 // });
 
-const Businesses = () => {
-  const [businessesRef, setBusunessesRef] = useState([]);
+const Businesses = (props) => {
+  const [businessesRef, setBusinessesRef] = useState([]);
   const [businesses, setBusinesses] = useState([]);
+  const [helperRef, setHelperRef] = useState([]);
   useEffect(() => {
     result.get("/businesses.json").then((res) => {
       Object.keys(res.data).forEach((key, index) => {
         res.data[key].id = key;
-        setBusunessesRef((old) => [...old, res.data[key]]);
+
+        setBusinessesRef((old) => [...old, res.data[key]]);
+        setHelperRef((old) => [...old, res.data[key]]);
       });
     });
   }, []);
+
+  useEffect(() => {
+    setBusinessesRef(() => []);
+    setBusinesses(() => []);
+
+    helperRef.forEach((val) => {
+      if (!props.searchV || props.searchV === "") {
+        setBusinessesRef(helperRef);
+      } else if (
+        val.companyName.toLowerCase().includes(props.searchV.toLowerCase())
+      ) {
+        setBusinessesRef(() => []);
+        setBusinessesRef(() => [val]);
+      }
+    });
+    if (!props.searchV || props.searchV === "") {
+      setBusinessesRef(helperRef);
+      return;
+    }
+  }, [props.searchV]);
 
   useEffect(() => {
     businessesRef.forEach((business) => {
@@ -46,9 +70,11 @@ const Businesses = () => {
         isOpen: IsItOpen(business),
         name: business.companyName,
         address: business.contact.address,
+        type: business.companyType,
       };
 
       setBusinesses((old) => [...old, infoObj]);
+      console.log(businesses);
     });
   }, [businessesRef]);
 
@@ -75,7 +101,7 @@ const Businesses = () => {
                   },
                 }}
                 key={index}
-                onClick={(e) => console.log(row.id)}
+                onClick={() => console.log(row.id)}
               >
                 <TableCell
                   sx={{
@@ -86,6 +112,19 @@ const Businesses = () => {
                   align="right"
                 >
                   {row.name}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "start",
+                    border: "1px solid gray",
+                    borderRadius: "10px",
+                    p: 0,
+                    display: "block",
+                    width: "auto",
+                  }}
+                  align="left"
+                >
+                  {row.type}
                 </TableCell>
                 <TableCell
                   sx={{

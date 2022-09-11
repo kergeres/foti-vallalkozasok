@@ -25,6 +25,7 @@ const drawerWidth = 240;
 function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState("");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -44,6 +45,9 @@ function Header(props) {
       width: "auto",
     },
   }));
+  const searchValueForward = (e) => {
+    props.setSearchV(e.target.value);
+  };
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -148,7 +152,10 @@ function Header(props) {
                       </SearchIconWrapper>
                       <StyledInputBase
                         placeholder="Keresés"
+                        value={props.searchV}
                         inputProps={{ "aria-label": "search" }}
+                        onChange={(e) => props.setSearchV(e.target.value)}
+                        autoFocus
                       />
                     </Search>
                   </Grid>
