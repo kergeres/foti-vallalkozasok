@@ -6,15 +6,20 @@ import {
   Card,
   CardContent,
   Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import result from "../api/firebaseApis";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { v4 } from "uuid";
 import TimePickerem from "../helpers/TimePickerem";
-
+import cvts from "../../data/cvts";
 import { useState } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import codeToValue from "../helpers/codeToValue";
 
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
@@ -34,9 +39,9 @@ const storage = getStorage(app);
 
 const UploadForm = () => {
   const [imageUpload, setImageUpload] = useState(null);
+  const [coType, setCoType] = React.useState("");
 
   const companyNameRef = useRef();
-  const companyTypeRef = useRef();
   const phoneRef = useRef(null);
   const emailRef = useRef(null);
   const addressRef = useRef(null);
@@ -60,7 +65,7 @@ const UploadForm = () => {
   const save = (profilePUrl) => {
     let tomb = {
       companyName: companyNameRef.current.value,
-      companyType: companyTypeRef.current.value,
+      companyTypeCode: coType,
       id: v4(),
       contact: {
         phone: phoneRef.current.value,
@@ -91,7 +96,13 @@ const UploadForm = () => {
     };
     result.post("/businesses.json", tomb);
   };
+  const coTypeChange = (event) => {
+    const nev = codeToValue(event.target.value, "BUSINESSTYPE");
 
+    console.log(nev);
+
+    setCoType(event.target.value);
+  };
   const uploadFile = (e) => {
     e.preventDefault();
     if (imageUpload == null) return;
@@ -121,14 +132,37 @@ const UploadForm = () => {
                   inputRef={companyNameRef}
                 />
               </Grid>
+
               <Grid xs={12} sm={6} item>
-                <TextField
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Vállalkozás típusa
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Vállalkozás neve"
+                    value={coType}
+                    name="companyTypeCode"
+                    onChange={coTypeChange}
+                  >
+                    {cvts.BUSINESSTYPE.map((item) => {
+                      return (
+                        <MenuItem key={item.code} value={item.code}>
+                          {item.value}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+
+                {/* <TextField
                   label="Vállalkozás typusa"
-                  name="companyType"
+                  name="companyTypeCode"
                   variant="outlined"
                   fullWidth
-                  inputRef={companyTypeRef}
-                />
+                  inputRef={companyTypeCodeRef}
+                /> */}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField

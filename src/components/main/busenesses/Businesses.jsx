@@ -11,7 +11,7 @@ import IsItOpen from "../../helpers/IsItOpen";
 import result from "../../api/firebaseApis";
 import { useState } from "react";
 import { useEffect } from "react";
-import { reduceEachLeadingCommentRange } from "typescript";
+import codeToValue from "../../helpers/codeToValue";
 
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 dayjs.extend(customParseFormat);
@@ -51,7 +51,10 @@ const Businesses = (props) => {
       if (!props.searchV || props.searchV === "") {
         setBusinessesRef(helperRef);
       } else if (
-        val.companyName.toLowerCase().includes(props.searchV.toLowerCase())
+        val.companyName.toLowerCase().includes(props.searchV.toLowerCase()) ||
+        codeToValue(val.companyTypeCode, "BUSINESSTYPE")
+          .toLowerCase()
+          .includes(props.searchV.toLowerCase())
       ) {
         setBusinessesRef(() => []);
         setBusinessesRef(() => [val]);
@@ -64,17 +67,45 @@ const Businesses = (props) => {
   }, [props.searchV]);
 
   useEffect(() => {
+    setBusinessesRef(() => []);
+    setBusinesses(() => []);
+
+    if (props.isOpenNowCheck) {
+      const isOpenNow = helperRef.filter((val) => {
+        return IsItOpen(val) === true;
+      });
+      setBusinessesRef(() => [isOpenNow]);
+    }
+    helperRef.forEach((val) => {
+      if (!props.searchType || props.searchType === "") {
+        setBusinessesRef(helperRef);
+      } else if (
+        codeToValue(val.companyTypeCode, "BUSINESSTYPE")
+          .toLowerCase()
+          .includes(props.searchType.toLowerCase())
+      ) {
+        setBusinessesRef(() => []);
+        setBusinessesRef(() => [val]);
+      }
+    });
+    if (!props.searchType || props.searchType === "") {
+      setBusinessesRef(helperRef);
+      return;
+    }
+  }, [props.searchType, props.isOpenNowCheck]);
+
+  useEffect(() => {
     businessesRef.forEach((business) => {
       let infoObj = {
         id: business.id,
         isOpen: IsItOpen(business),
         name: business.companyName,
         address: business.contact.address,
-        type: business.companyType,
+        type: codeToValue(business.companyTypeCode, "BUSINESSTYPE"),
       };
 
       setBusinesses((old) => [...old, infoObj]);
-      console.log(businesses);
+      // console.log(businesses);
     });
   }, [businessesRef]);
 

@@ -6,11 +6,13 @@ import OpeningHours from "./inGrid/openingHours";
 import ContactInfo from "./inGrid/contactInfo";
 import IsItOpen from "../../helpers/IsItOpen";
 import result from "../../api/firebaseApis";
+import codeToValue from "../../helpers/codeToValue";
 // const businessesRef = require("../../../data/zample.json");
 // const business = businessesRef[0];
 
 const BusinessProfile = () => {
-  const chosenId = "-NB7PkYcLjBKT-mODb6R";
+  const chosenId = "-NBgFiDz5aKZ59oq9uBU";
+
   const [business, setBusiness] = useState([]);
 
   useEffect(() => {
@@ -33,7 +35,9 @@ const BusinessProfile = () => {
         >
           <Grid item>
             <Typography variant="h1">{business[0].companyName}</Typography>
-            <Typography variant="h6">{business[0].companyType}</Typography>
+            <Typography variant="h6">
+              {codeToValue(business[0].companyTypeCode, "BUSINESSTYPE")}
+            </Typography>
           </Grid>
         </Grid>
         {/* harmas felosztasu grid */}

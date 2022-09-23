@@ -9,11 +9,26 @@ import Businesses from "./main/busenesses/Businesses";
 
 const Layout = () => {
   const [searchV, setSearchV] = React.useState("");
+  const [searchType, setSearchType] = React.useState(null);
+  const [isOpenNowCheck, setIsOpenNowCheck] = React.useState(false);
+
   return (
     <ThemeProvider theme={theme}>
-      <Header searchV={searchV} setSearchV={setSearchV} />
+      <Header
+        searchType={searchType}
+        setSearchType={setSearchType}
+        searchV={searchV}
+        setSearchV={setSearchV}
+        isOpenNowCheck={isOpenNowCheck}
+        setIsOpenNowCheck={setIsOpenNowCheck}
+      />
       {/* <UploadForm /> */}
-      <Businesses searchV={searchV} />
+      <Businesses
+        isOpenNowCheck={isOpenNowCheck}
+        setIsOpenNowCheck={setIsOpenNowCheck}
+        searchType={searchType}
+        searchV={searchV}
+      />
       {/* <BusinessProfile /> */}
       {/* <Footer /> */}
     </ThemeProvider>

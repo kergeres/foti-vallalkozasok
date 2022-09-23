@@ -10,6 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import { Scrollbars } from "react-custom-scrollbars";
 import { styled, alpha } from "@mui/material/styles";
 import { Grid } from "@mui/material";
@@ -25,8 +26,10 @@ const drawerWidth = 240;
 function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState("");
 
+  const handleChange = (event) => {
+    props.setIsOpenNowCheck(event.target.checked);
+  };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -45,9 +48,6 @@ function Header(props) {
       width: "auto",
     },
   }));
-  const searchValueForward = (e) => {
-    props.setSearchV(e.target.value);
-  };
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -93,12 +93,12 @@ function Header(props) {
         component="nav"
       >
         <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
+        // sx={{
+        //   display: "flex",
+        //   justifyContent: "center",
+        // }}
         >
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -106,7 +106,7 @@ function Header(props) {
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             component="div"
@@ -118,7 +118,7 @@ function Header(props) {
           <Box
             sx={{
               width: "100%",
-              display: { xs: "none", sm: "flex" },
+              display: "flex",
             }}
           >
             <Grid
@@ -127,9 +127,17 @@ function Header(props) {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={2}>
-                <img src={logo} className="App-logo" alt="logo" />
-              </Grid>
+              {!navigator.userAgent.match(/Android/i) &&
+                !navigator.userAgent.match(/iPhone/i) && (
+                  <Grid item xs={0}>
+                    <img
+                      src={logo}
+                      sx={{ display: "none" }}
+                      className="App-logo"
+                      alt="logo"
+                    />
+                  </Grid>
+                )}
               <Grid
                 item
                 sx={{
@@ -139,7 +147,7 @@ function Header(props) {
                 xs={6}
               >
                 <Grid
-                  sx={{ height: 100, width: "100%" }}
+                  sx={{ height: 100, width: { xs: "150%", md: "100%" } }}
                   container
                   direction="column"
                   justifyContent="end"
@@ -152,6 +160,7 @@ function Header(props) {
                       </SearchIconWrapper>
                       <StyledInputBase
                         placeholder="Keresés"
+                        disabled={props.searchType}
                         value={props.searchV}
                         inputProps={{ "aria-label": "search" }}
                         onChange={(e) => props.setSearchV(e.target.value)}
@@ -163,7 +172,7 @@ function Header(props) {
                   <Grid
                     sx={{
                       // border: "1px solid white",
-                      width: "100%",
+                      width: { xs: "100vw", md: "100%" },
                       height: "50%",
                       mb: -2,
                       display: "flex",
@@ -173,10 +182,34 @@ function Header(props) {
                   >
                     {cvts.BUSINESSTYPE.map((item) => {
                       return (
-                        <BusinessTypeCard key={item.value} name={item.value} />
+                        <BusinessTypeCard
+                          key={item.code}
+                          name={item.value}
+                          type={item.code}
+                          setSearchType={props.setSearchType}
+                          searchType={props.searchType}
+                        />
                       );
                     })}
                   </Grid>
+                  {/* <Grid item>
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            onChange={handleChange}
+                            checked={props.isOpenNowCheck}
+                            sx={{
+                              "&.Mui-checked": {
+                                color: "black",
+                              },
+                            }}
+                          />
+                        }
+                        label="Most is Nyitva"
+                      />
+                    </FormGroup>
+                  </Grid> */}
                 </Grid>
               </Grid>
               <Grid xs={2} item />

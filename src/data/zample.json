@@ -1,7 +1,7 @@
 [
     {
         "companyName": "Foti Bolt",
-        "companyType": "hentes",
+        "companyTypeCode": "hentes",
         "contact": {
             "phone": "+3620984443",
             "email": "kergeres@gmail.com",
@@ -28,7 +28,7 @@
     },
     {
         "companyName": "Szepesi zöldség",
-        "companyType": "hentes",
+        "companyTypeCode": "hentes",
         "contact": {
             "phone": "+3620984213",
             "email": "masok@gmail.com",
@@ -55,7 +55,7 @@
     },
     {
         "companyName": "Tesco Dunakeszi",
-        "companyType": "hentes",
+        "companyTypeCode": "hentes",
         "contact": {
             "phone": "+362044223ö",
             "email": "info@gmail.com",
@@ -82,7 +82,7 @@
     },
     {
         "companyName": "Kerékcsere Azsi",
-        "companyType": "hentes",
+        "companyTypeCode": "hentes",
         "contact": {
             "phone": "+362044299",
             "email": "aaafo@smartix.com",

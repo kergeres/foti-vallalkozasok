@@ -9,10 +9,6 @@ const cvts = {
       code: "002",
     },
     {
-      value: "Kocsma",
-      code: "003",
-    },
-    {
       value: "Benzinkút",
       code: "003",
     },
@@ -27,6 +23,10 @@ const cvts = {
     {
       value: "Zöldséges",
       code: "006",
+    },
+    {
+      value: "Kocsma",
+      code: "007",
     },
   ],
 };
